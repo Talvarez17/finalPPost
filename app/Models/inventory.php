@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 
-class Tienda extends Model{ 
+class Inventory extends Model{ 
     
     use HasApiTokens, HasFactory;
-    protected $table = 'tienda';
+    protected $table = 'inventory';
     protected $fillable = [
-        'id',
-        'nombre',
-        'edad',
+        'inventory_id',
+        'film_id',
+        'store_id',
+ 
     ];
     public $timestamps = true;
 }

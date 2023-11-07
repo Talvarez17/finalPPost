@@ -5,8 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 
+
+Route::get('/generate/models', '\\Jimbolino\\Laravel\\ModelBuilder\\ModelGenerator5@start');
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
+
 Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::get('user-profile', [UserController::class, 'userprofile']);
     Route::get('logout', [UserController::class, 'logout']);
