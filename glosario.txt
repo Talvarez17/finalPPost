@@ -1,0 +1,34 @@
+vagrant status // ver estatus
+vagrant ssh  
+exit // Salir
+vagrant halt --f  // Apagar
+
+
+Glosario 
+Instalacion de un proyecto de laravel
+- composer global require laravel/installer
+
+Creacion de un proyecto en laravel 
+- laravel new nombre-proyecto
+
+Dentro del proyecto levantar servicios 
+- php artisan serve 
+
+Instalacion de Sanctum
+- composer require laravel/sanctum
+
+Sincronizar de modelos a la Base de Datos 
+- php artisan migrate 
+
+Creacion de modelo (Cuando es -m es con migracion / -mcr es para usar migracion con controlador con recursos(resources))
+- php artisan make:model nombreModelo
+
+Creacion del Controlador (si usamos --resouce / aplica los recursos en funcion de INDEX, CREATE , STORE, EDIT, UPDATE,SHOW,DESTROY)
+- php artisan make:controller Api/nombreController 
+
+Vizualizacion lista de rutas 
+- php artisan route:list
+
+Crear tabla desde proyecto
+- php artisan make:migrate nombreTabla 
+
