@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         $user = new User();
@@ -27,12 +28,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
-
         $user = User::where("email", "=", $request->email)->first();
         if (isset($user->id)) {
             if (Hash::check($request->password, $user->password)) {
@@ -42,33 +43,34 @@ class UserController extends Controller
                     "mensaje" => "Usuario Correcto",
                     "access_token" => $token
                 ]);
-
-            } else response()->json([
+            } else {
+                return response()->json([
+                    "estatus" => 0,
+                    "mensaje" => "Usuario Incorrecto"
+                ], 404);
+            }
+        } else {
+            return response()->json([
                 "estatus" => 0,
-                "mensaje" => "Usuario Incorrecto"
-            ]);
-
-        } else response()->json([
-            "estatus" => 0,
-            "mensaje" => "Usuario Inexistente"
-        ], 404);
+                "mensaje" => "Usuario inexistente"
+            ], 404);
+        }
     }
 
-    function userprofile(){
-
+    function userprofile()
+    {
         return response()->json([
             "estatus" => 1,
             "mensaje" => "Perfil Usuario",
             "data" => auth()->user()
         ]);
     }
-
-    function logout(){
-        
+    function logout()
+    {
         auth()->user()->tokens()->delete();
         return response()->json([
             "estatus" => 1,
-            "mensaje" => "Cierre de Sesion"
+            "mensaje" => "Cierre de Sesión"
         ]);
     }
 }

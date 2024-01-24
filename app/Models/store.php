@@ -10,8 +10,9 @@ class Store extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'store';
+    public $primaryKey = 'srore_id';
+
     protected $fillable = [
-        'store_id',
         'manager_staff_id',
         'address_id',
  

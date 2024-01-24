@@ -10,8 +10,8 @@ class Category extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'category';
+    public $primaryKey = 'category_id';
     protected $fillable = [
-        'category_id',
         'name',
     ];
     public $timestamps = false;

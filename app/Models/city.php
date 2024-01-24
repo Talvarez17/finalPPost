@@ -10,8 +10,9 @@ class City extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'city';
+    public $primaryKey = 'city_id';
+    
     protected $fillable = [
-        'city_id',
         'city',
         'county_id',
     ];

@@ -10,8 +10,9 @@ class Country extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'country';
+    public $primaryKey = 'country_id';
+
     protected $fillable = [
-        'country_id',
         'country',
     ];
     public $timestamps = false;

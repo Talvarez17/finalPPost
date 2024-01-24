@@ -10,8 +10,8 @@ class Film extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'film';
+    public $primaryKey = 'film_id';
     protected $fillable = [
-        'film_id',
         'title',
         'description',
         'release_year',

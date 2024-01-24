@@ -10,8 +10,9 @@ class Customer extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'customer';
+    public $primaryKey = 'customer_id';
+
     protected $fillable = [
-        'customer_id',
         'store_id',
         'first_name',
         'last_name',

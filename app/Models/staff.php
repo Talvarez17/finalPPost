@@ -10,8 +10,9 @@ class Staff extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'staff';
+    public $primaryKey = 'staff_id';
+
     protected $fillable = [
-        'staff_id',
         'first_name',
         'last_name',
         'address_id',

@@ -10,8 +10,8 @@ class Payment extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'payment';
+    public $primaryKey = 'payment_id';
     protected $fillable = [
-        'payment_id',
         'customer_id',
         'staff_id',
         'rental_id',

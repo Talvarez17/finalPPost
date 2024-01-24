@@ -10,8 +10,8 @@ class Address extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'address';
+    public $primaryKey = 'address_id';
     protected $fillable = [
-        'address_id',
         'address',
         'address2',
         'district',

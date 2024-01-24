@@ -10,8 +10,9 @@ class Rental extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'rental';
+    public $primaryKey = 'rental_id';
+
     protected $fillable = [
-        'rental_id',
         'rental_date',
         'inventory_id',
         'customer_id',

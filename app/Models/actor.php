@@ -10,8 +10,8 @@ class Actor extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'actor';
+    public $primaryKey = 'actor_id';
     protected $fillable = [
-        'actor_id',
         'first_name',
         'last_name',
     ];

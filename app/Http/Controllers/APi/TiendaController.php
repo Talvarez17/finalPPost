@@ -8,13 +8,14 @@ use App\Models\Tienda;
 
 class TiendaController extends Controller
 {
-    public function index(){
-
+    public function index()
+    {
         $Tienda = Tienda::All();
         return response()->json($Tienda);
     }
 
-    public function index_id($id){
+    public function index_id($id)
+    {
         $Tienda = Tienda::find($id);
         return response()->json($Tienda);
     }
@@ -25,41 +26,37 @@ class TiendaController extends Controller
             'nombre' => 'required|unique:tienda',
             'edad' => 'required',
         ]);
-
         $Tienda = new Tienda();
         $Tienda->nombre = $request->nombre;
         $Tienda->edad = $request->edad;
         $Tienda->save();
-
         return response()->json([
+            "Model" => $Tienda,
             "estatus" => 1,
-            "mensaje" => "registrado"
+            "mensaje" => "Registrado"
         ]);
     }
-
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $request->validate([
             'nombre' => 'required',
             'edad' => 'required',
         ]);
-
         $Tienda = Tienda::find($id);
         $Tienda->nombre = $request->nombre;
         $Tienda->edad = $request->edad;
         $Tienda->update();
-
         return response()->json([
-            "Model"=>$Tienda,
+            "Model" => $Tienda,
             "estatus" => 1,
-            "mensaje" => "registrado"
+            "mensaje" => "Actualizado"
         ]);
     }
-
-    public function delete($id){
-        
+    public function delete($id)
+    {
         $Tienda = Tienda::find($id)->delete();
         return response()->json([
-            
+            "Model" => $Tienda,
             "estatus" => 1,
             "mensaje" => "Eliminado"
         ]);

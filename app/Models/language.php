@@ -10,8 +10,9 @@ class Language extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'language';
+    public $primaryKey = 'languaje_id';
+
     protected $fillable = [
-        'language_id',
         'name',
     
     ];

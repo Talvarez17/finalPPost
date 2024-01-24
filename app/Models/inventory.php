@@ -10,8 +10,9 @@ class Inventory extends Model{
     
     use HasApiTokens, HasFactory;
     protected $table = 'inventory';
+    public $primaryKey = 'inventory_id';
+
     protected $fillable = [
-        'inventory_id',
         'film_id',
         'store_id',
  
