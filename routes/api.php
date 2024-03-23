@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ActorController;
 use App\Http\Controllers\Api\TiendaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Api\CityController;
 
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
+Route::get('obtenerActores/{pagina}/{limite}',[ActorController::class,'getJson'])->where("pagina",'[0-9]+'); //La parte del where nos ayuda a restringir los datos de entrada
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::get('user-profile', [UserController::class, 'userprofile']);

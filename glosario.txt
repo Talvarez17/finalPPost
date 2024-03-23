@@ -1,5 +1,5 @@
 vagrant status // ver estatus
-vagrant ssh  
+vagrant ssh  // Corre caja
 exit // Salir
 vagrant halt --f  // Apagar
 
@@ -31,4 +31,8 @@ Vizualizacion lista de rutas
 
 Crear tabla desde proyecto
 - php artisan make:migrate nombreTabla 
+
+Actualizacion de las rutas sin no cambian
+
+- php artisan route:cache
 

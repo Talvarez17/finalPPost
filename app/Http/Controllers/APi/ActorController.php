@@ -56,7 +56,7 @@ public function update(Request $request,$actor_id)
 }
 public function delete($actor_id)
 {
-    $Actor =Actor::find($actor_id)->delete();
+    $Actor = Actor::find($actor_id)->delete();
     return response()->json([
         "Model"=>$Actor,
         "estatus"=> 1,
@@ -64,5 +64,16 @@ public function delete($actor_id)
 
     ],);
 
+}
+
+// 
+public function getJson($pagina = 0, $limite){
+
+    // $respuesta = Actor::all(); //Obtener todos los registros
+    //$respuesta = Actor::limit(1)->get(); //Obtener con limite
+
+    $respuesta = Actor::offset(($pagina - 1)* $limite)->limit($limite)->get(); //Obtener con limite y paginacion
+
+    return response()->json($respuesta);
 }
 }
