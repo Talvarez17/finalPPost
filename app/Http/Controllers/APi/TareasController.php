@@ -40,7 +40,7 @@ class TareasController extends Controller
             "mensaje" => "Tarea registrada"
         ]);
     }
-    public function updateTarea(Request $request, $id)
+    public function updateTarea(Request $request)
     {
         $request->validate([
             'titulo' => 'required',
@@ -48,7 +48,7 @@ class TareasController extends Controller
             'fechacreacion' => 'required',
         ]);
     
-        $Tarea = new Tarea();
+        $Tarea = Tarea::find($request->id);
         $Tarea->titulo = $request->titulo;
         $Tarea->descripcion = $request->descripcion; 
         $Tarea->fechacreacion = $request->fechacreacion;

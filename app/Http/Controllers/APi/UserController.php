@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
@@ -28,49 +28,77 @@ class UserController extends Controller
         ]);
     }
 
-    public function login(Request $request)
+    public function encriptar(Request $request){
+   
+        $user= new User();
+        $user->password = Hash::make($request->password);
+
+        return response()->json([
+            "pass" => $user->password
+        ]);
+    } 
+
+    public function getRegistros()
     {
+        $User = User::All();
+        return response()->json($User);
+    }
+
+    public function getUserById($id)
+    {
+        $User = User::find($id);
+        return response()->json($User);
+    }
+    
+    public function updateUser(Request $request, $id)
+    {
+        
         $request->validate([
+            'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        $user = User::where("email", "=", $request->email)->first();
-        if (isset($user->id)) {
-            if (Hash::check($request->password, $user->password)) {
-                $token = $user->createToken("auth_token")->plainTextToken;
-                return response()->json([
-                    "estatus" => 1,
-                    "mensaje" => "Usuario Correcto",
-                    "access_token" => $token
-                ]);
-            } else {
-                return response()->json([
-                    "estatus" => 0,
-                    "mensaje" => "Usuario Incorrecto"
-                ], 404);
-            }
-        } else {
-            return response()->json([
-                "estatus" => 0,
-                "mensaje" => "Usuario inexistente"
-            ], 404);
-        }
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->update();
+
+        return response()->json([
+            "estatus" => 1,
+            "mensaje" => "User actualizada"
+        ]);
+    }
+    public function deleteUser($id)
+    {
+        $User = User::find($id)->delete();
+        return response()->json([
+            "estatus" => 1,
+            "mensaje" => "User eliminada"
+        ]);
     }
 
-    function userprofile()
-    {
+    public function login(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+
+    $user = User::where('email', $request->email)->first();
+
+    if (!$user || $request->password !== $user->password) {
         return response()->json([
-            "estatus" => 1,
-            "mensaje" => "Perfil Usuario",
-            "data" => auth()->user()
-        ]);
+            "estatus" => 0,
+            "mensaje" => "Credenciales incorrectas"
+        ], 401);
     }
-    function logout()
-    {
-        auth()->user()->tokens()->delete();
-        return response()->json([
-            "estatus" => 1,
-            "mensaje" => "Cierre de Sesión"
-        ]);
-    }
+
+    return response()->json([
+        "estatus" => 1,
+        "mensaje" => "Inicio de sesión exitoso"
+    ]);
+}
 }

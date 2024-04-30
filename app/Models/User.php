@@ -18,5 +18,6 @@ class User extends Authenticatable{
         'password',
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
+    public $primaryKey = 'id';
 }
